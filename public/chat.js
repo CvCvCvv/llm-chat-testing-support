@@ -1,4 +1,5 @@
 /**
+/**
  * LLM Chat App Frontend
  *
  * Handles the chat UI interactions and communication with the backend API.
@@ -91,43 +92,21 @@ async function sendMessage() {
     }
 
     // Process streaming response
-    const reader = response.body.getReader();
-    const decoder = new TextDecoder();
-    let responseText = "";
+    const data = await response.json();
 
-    while (true) {
-      const { done, value } = await reader.read();
+    // Проверка и отображение ответа
+    let responseText = data.response || "Нет ответа от модели.";
 
-      if (done) {
-        break;
-      }
-
-      // Decode chunk
-      const chunk = decoder.decode(value, { stream: true });
-
-      // Process SSE format
-      const lines = chunk.split("\n");
-      for (const line of lines) {
-        if (line.startsWith("data:")) {
-          try {
-            const jsonData = JSON.parse(line.substring(5));
-            if (jsonData.response) {
-              // Append new content to existing text
-              responseText += jsonData.response;
-              assistantMessageEl.querySelector("p").textContent = responseText;
-
-              // Scroll to bottom
-              chatMessages.scrollTop = chatMessages.scrollHeight;
-            }
-          } catch (e) {
-            console.error("Error parsing JSON:", e);
-          }
-        }
-      }
+    const p = assistantMessageEl.querySelector("p");
+    if (p) {
+      p.textContent = responseText;
     }
 
-    // Add completed response to chat history
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+
+    // Добавление в историю
     chatHistory.push({ role: "assistant", content: responseText });
+    
   } catch (error) {
     console.error("Error:", error);
     addMessageToChat(
