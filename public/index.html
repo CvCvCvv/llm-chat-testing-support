@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LLM Chat App</title>
+    <title>LLM Чат</title>
     <style>
       :root {
         --primary-color: #f6821f;
@@ -138,7 +138,7 @@
   </head>
   <body>
     <header>
-      <h1>Cloudflare AI Chat</h1>
+      <h1>Чат-бот поддержки тестирования</h1>
       <p>Powered by Cloudflare Workers AI</p>
     </header>
 
@@ -146,24 +146,23 @@
       <div id="chat-messages" class="chat-messages">
         <div class="message assistant-message">
           <p>
-            Hello! I'm an LLM chat app powered by Cloudflare Workers AI. How can
-            I help you today?
+            Привет! Я LLM помощник тестирования. Чем могу помочь сегодня?
           </p>
         </div>
       </div>
 
       <div class="typing-indicator" id="typing-indicator">
-        AI is thinking...
+        AI думает...
       </div>
 
       <div class="message-input">
         <textarea
           id="user-input"
-          placeholder="Type your message here..."
+          placeholder="Введите ваше сообщение..."
           rows="1"
           autofocus
         ></textarea>
-        <button id="send-button">Send</button>
+        <button id="send-button">Отправить</button>
       </div>
     </div>
 

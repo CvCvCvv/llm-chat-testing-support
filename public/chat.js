@@ -16,7 +16,7 @@ let chatHistory = [
   {
     role: "assistant",
     content:
-      "Hello! I'm an LLM chat app powered by Cloudflare Workers AI. How can I help you today?",
+      "Привет! Я LLM помощник тестирования. Чем могу помочь сегодня?",
   },
 ];
 let isProcessing = false;
@@ -106,7 +106,7 @@ async function sendMessage() {
 
     // Добавление в историю
     chatHistory.push({ role: "assistant", content: responseText });
-    
+
   } catch (error) {
     console.error("Error:", error);
     addMessageToChat(
